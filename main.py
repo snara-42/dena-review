@@ -2,13 +2,6 @@ import re
 import argparse
 
 
-def input_int(s):
-    while True:
-        try:
-            n = int(input(s).strip())
-            return n
-        except ValueError:
-            continue
 
 
 class Game:
@@ -22,35 +15,50 @@ class Game:
     def __str__(self):
         return "\n".join((*[" ".join(s).translate(str.maketrans({k: v for k, v in zip(".xo", self.sym)})) for s in zip(*[col.ljust(self.y, ".")[::-1] for col in self.board])], self.sym[0].join([str(i) for i in range(1, self.x+1)])))
 
+    @staticmethod
+    def input_int(prompt):
+        while True:
+            try:
+                n = int(input(prompt).strip())
+                return n
+            except ValueError:
+                continue
+
+    def input_valid_index(self, prompt):
+        while True:
+            n = self.input_int(prompt)
+            if 1 <= n <= self.x and len(self.board[n-1]) < self.y:
+                return n
+
     def has_won(self, c: str):
-        reg = re.compile("({})|({})|({})|({})".format(
-            "("+c+"){"+str(self.len)+"}",
-            "("+c+".{"+str(self.y)+"}){"+str(self.len-1)+"}"+c,
-            "("+c+".{"+str(self.y+1)+"}){"+str(self.len-1)+"}"+c,
-            "("+c+".{"+str(self.y+2)+"}){"+str(self.len-1)+"}"+c,))
+        reg = re.compile(
+            "(("+c+"){"+str(self.len)+"})"
+            + "|(("+c+".{"+str(self.y-1)+"}){"+str(self.len-1)+"}"+c+")"
+            + "|(("+c+".{"+str(self.y) + "}){"+str(self.len-1)+"}"+c+")"
+            + "|(("+c+".{"+str(self.y+1)+"}){"+str(self.len-1)+"}"+c+")")
         print(reg)
-        return reg.search("/".join(col.ljust(self.y, ".") for col in self.board))
+        return reg.search("/".join(c.ljust(self.y, ".") for c in self.board))
 
     def play_round(self):
         for i in range(self.x * self.y):
+            print(self, f"\n{i+1} player{i%2+1}[{self.sym[i%2+1]}]'s turn")
+            n = self.input_valid_index("> ")
             c = "xo"[i % 2]
-            print(self, f" turn {i+1}\nplayer [{self.sym[i%2+1]}]'s turn.")
-            while True:
-                n = input_int("> ")
-                if 1 <= n <= self.x and len(self.board[n-1]) < self.y:
-                    self.board[n-1] += c
-                    break
+            self.board[n-1] += c
             if self.has_won(c):
-                print(self, f"\nplayer [{self.sym[i%2+1]}] wins!\n\n")
+                print(self, f"\nplayer{i%2+1}[{self.sym[i%2+1]}] wins!\n\n")
                 break
         else:
             print(self, "\ndraw!\n\n")
-        input("\npress enter to play again")
+        input("\nPress enter to play again ")
 
     def play(self):
-        while True:
-            self.board = ["" for _ in range(self.x)]
-            self.play_round()
+        try:
+            while True:
+                self.board = ["" for _ in range(self.x)]
+                self.play_round()
+        except EOFError:
+            return
 
 
 def main():
