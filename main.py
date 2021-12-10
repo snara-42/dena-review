@@ -43,11 +43,11 @@ class Game:
             c = "xo"[i % 2]
             self.board[n-1] += c
             if self.has_won(c):
-                res = f"\n{self}\nplayer{i%2+1}[{self.sym[i%2+1]}] wins!\n"
+                res = f"\n{self}player{i%2+1}[{self.sym[i%2+1]}] wins!\n"
                 print(res)
                 break
         else:
-            res = f"\n{self}\ndraw!\n"
+            res = f"\n{self}draw!\n"
             print(res)
         try:
             with open(self.logfile, "a") as f:
