@@ -1,81 +1,89 @@
 rm -f test.log
-python main.py -o test.log << EOF
-#draw#
-1
-1
-1
-1
-1
-1
-2
-2
-2
-2
-2
-2
-3
-3
-3
-3
-3
-3
-5
-5
-5
-5
-5
-5
-6
-6
-6
-6
-6
-6
-7
-7
-7
-7
-7
-4
-4
-4
-4
-4
-4
-7
 
-#x-#
+python main.py -p1 "🟥" -p2 "🟢" -e "  " -o test.log << _
+1
+1
+1
+1
 1
 1
 2
 2
+2
+2
+2
+2
 3
 3
+3
+3
+3
+3
+5
+5
+5
+5
+5
+5
+6
+6
+6
+6
+6
+6
+7
+7
+7
+7
+7
 4
+4
+4
+4
+4
+4
+7
+_
+#draw
 
-#x|#
+python main.py -p1 "#" -p2 "$" -e "_" -o test.log << _
+1
 1
 2
-1
 2
-1
-2
-1
+3
+3
+4
+_
+#x-
 
-#x/#
+python main.py -p1 "!" -p2 "|" -e ":" -o test.log << _
 1
 2
+1
 2
 1
-3
-3
-3
-4
-4
-4
-4
+2
+1
+_
+#x|
 
-#x\ #
+python main.py -p1 "/" -p2 "\\" -e "-" -o test.log << _
+1
+2
+2
+1
+3
+3
+3
+4
+4
+4
+4
+_
+#x/
+
+python main.py -p1 "/" -p2 "\\" -e "^" -o test.log << _
 5
 4
 5
@@ -87,8 +95,10 @@ python main.py -o test.log << EOF
 7
 7
 6
+_
+#x\ 
 
-#o|#
+python main.py -p1 "ا" -p2 "ب" -e "ه" -o test.log << _
 1
 1
 2
@@ -97,8 +107,10 @@ python main.py -o test.log << EOF
 1
 2
 1
+_
+#o|
 
-#o-#
+python main.py -p1 "先" -p2 "後" -e "白" -x 10 -o test.log << _
 7
 7
 7
@@ -125,8 +137,10 @@ python main.py -o test.log << EOF
 4
 3
 4
+_
+#o-
 
-#o/#
+python main.py -p1 "eax" -p2 "mov" -e "nop" -x 5 -o test.log << _
 1
 1
 1
@@ -140,7 +154,6 @@ python main.py -o test.log << EOF
 2
 2
 2
-3
 3
 3
 3
@@ -152,8 +165,10 @@ python main.py -o test.log << EOF
 4
 5
 4
+_
+#o/
 
-#o\ #
+python main.py -n 5 -o test.log << _
 1
 1
 1
@@ -172,8 +187,15 @@ python main.py -o test.log << EOF
 3
 3
 3
-3
-5
+6
 4
-
-EOF
+4
+4
+4
+4
+4
+5
+6
+5
+_
+#o\ 
