@@ -1,74 +1,5 @@
 import argparse
-import re
-
-
-class Game:
-    def __init__(self, **kw):
-        self.x = kw.get("x", 7)
-        self.y = kw.get("y", 6)
-        self.n = kw.get("n", 4)
-        self.sym = [kw.get("e", "."), kw.get("p1", "x"), kw.get("p2", "o"), ]
-        self.logfile = kw.get("o", "result.log")
-        self.board = ["" for _ in range(self.x)]
-
-    def __str__(self):
-        s = "".join("|"+" ".join(row)+"|\n" for row in
-                    zip(*[col.ljust(self.y, ".")[::-1] for col in self.board]))\
-            + "-"*(self.x*2+1) + "\n|" + \
-            ".".join(f"{i+1}" for i in range(self.x))+"|\n"
-        return s.translate(str.maketrans(dict(zip(".xo", self.sym))))
-
-    @staticmethod
-    def input_int(prompt):
-        while True:
-            try:
-                return int(input(prompt).strip())
-            except ValueError:
-                continue
-
-    def input_valid_index(self, prompt):
-        while True:
-            n = self.input_int(prompt)
-            if 1 <= n <= self.x and len(self.board[n-1]) < self.y:
-                return n
-
-    def has_won(self, c: str):
-        reg = re.compile(
-            "(("+c+"){"+str(self.n)+"})"
-            + "|(("+c+".{"+str(self.y-1)+"}){"+str(self.n-1)+"}"+c+")"
-            + "|(("+c+".{"+str(self.y) + "}){"+str(self.n-1)+"}"+c+")"
-            + "|(("+c+".{"+str(self.y+1)+"}){"+str(self.n-1)+"}"+c+")")
-        return reg.search("/".join(c.ljust(self.y, ".") for c in self.board))
-
-    def play_round(self):
-        self.board = ["" for _ in range(self.x)]
-        for i in range(self.x * self.y):
-            print(f"\n{self}{i+1} player{i%2+1}[{self.sym[i%2+1]}]'s turn")
-            n = self.input_valid_index("> ")
-            c = "xo"[i % 2]
-            self.board[n-1] += c
-            if self.has_won(c):
-                res = f"\n{self}player{i%2+1}[{self.sym[i%2+1]}] wins!\n"
-                print(res)
-                break
-        else:
-            res = f"\n{self}draw!\n"
-            print(res)
-
-        try:
-            with open(self.logfile, "a") as f:
-                f.write(res)
-        except Exception as e:
-            print(e)
-        input("Press enter to play again... \n")
-
-    def play(self):
-        try:
-            while True:
-                self.play_round()
-        except EOFError:
-            print("bye!")
-            return
+import game
 
 
 def main():
@@ -89,8 +20,8 @@ def main():
                         metavar="FILE", help="file to save results")
     args = parser.parse_args()
 
-    game = Game(**vars(args))
-    game.play()
+    g = game.Game(**vars(args))
+    g.play()
 
 
 if __name__ == '__main__':
