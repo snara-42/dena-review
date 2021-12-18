@@ -98,19 +98,21 @@ python main.py -p1 "/" -p2 "\\" -e "^" -o test.log << _
 _
 #x\ 
 
-python main.py -p1 "ا" -p2 "ب" -e "ه" -o test.log << _
+python main.py -p1 "ῷ" -p2 "ἔ" -e "•" -o test.log << _
+3
+2
+3
+2
+3
+2
+1
 1
 1
 2
-1
-2
-1
-2
-1
 _
 #o|
 
-python main.py -p1 "先" -p2 "後" -e "白" -x 10 -o test.log << _
+python main.py -p1 "歩" -p2 "と" -e "口" -x 9 -y 9 -o test.log << _
 7
 7
 7
