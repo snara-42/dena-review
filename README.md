@@ -2,8 +2,7 @@
 
 
 ### usage
-```python main.py
-```
+```python main.py```
 ```
 optional arguments:
   -h, --help             show help message and exit
@@ -15,15 +14,16 @@ optional arguments:
   -x X, -width X         board width   (default 7)
   -y Y, -height Y        board height  (default 6)
   -n N, -length N        length to win (default 4)
-                         (N may not be greater than min(x,y))
+                         (N must be 1 <= N <= min(x, y))
   -o FILE, -logfile FILE file to save results
 ```
 
 ### examples
 
+
 ![game screenshot](docs/screenshot1.png)
 
-```python main.py -p1 "🟥" -p2 "🟢" -e "・" -x 8 -y 7
-```
+```python main.py -p1 "🟥" -p2 "🟢" -e "・" -x 8 -y 7```
+
 ![game screenshot](docs/screenshot2.png)
 
