@@ -1,6 +1,6 @@
 rm -f test.log
 
-python main.py -p1 "🟥" -p2 "🟢" -e "  " -o test.log << _
+python main.py -p1 "🟥" -p2 "🟢" -e "🔼" -s "　" -o test.log << _
 1
 1
 1
@@ -112,7 +112,7 @@ python main.py -p1 "ῷ" -p2 "ἔ" -e "•" -o test.log << _
 _
 #o|
 
-python main.py -p1 "歩" -p2 "と" -e "口" -x 9 -y 9 -o test.log << _
+python main.py -p1 "歩" -p2 "と" -e "王" -s "  " -x 9 -y 9 -o test.log << _
 7
 7
 7
@@ -142,7 +142,7 @@ python main.py -p1 "歩" -p2 "と" -e "口" -x 9 -y 9 -o test.log << _
 _
 #o-
 
-python main.py -p1 "eax" -p2 "mov" -e "nop" -x 5 -o test.log << _
+python main.py -p1 "eax" -p2 "mov" -e "___" -s "   " -x 5 -o test.log << _
 1
 1
 1

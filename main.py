@@ -10,6 +10,8 @@ def main():
                         default="o", help="symbol for player 2")
     parser.add_argument("-e", "-empty", type=str,
                         default=".", help="symbol for empty slot")
+    parser.add_argument("-s", "-separator", type=str,
+                        default=" ", help="for separating numbers")
     parser.add_argument("-x", "-width", type=int,
                         default=7, help="board width")
     parser.add_argument("-y", "-height", type=int,

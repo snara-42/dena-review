@@ -7,17 +7,20 @@ class Game:
         self.y = kw.get("y", 6)
         self.n = kw.get("n", 4)
         if not (1 <= self.n <= min(self.x, self.y)):
-            raise ValueError("invalid arguments")
-        self.sym = [kw.get("e", "."), kw.get("p1", "x"), kw.get("p2", "o")]
+            raise ValueError("values must satisfy 1 <= n <= min(x, y)")
+        self.sym = [kw.get("e", "."), kw.get("p1", "x"), kw.get("p2", "o"),
+                    kw.get("s", " ")]
         self.logfile = kw.get("o", "result.log")
         self.board = ["" for _ in range(self.x)]
 
     def __str__(self):
-        s = "\n"+"".join("|"+" ".join(row)+"|\n" for row in
-                         zip(*[f"{col:.<{self.y}}"[::-1] for col in self.board]))\
-            + "-"*(self.x*2+1) + "\n|"\
-            + ".".join(f"{i+1}" for i in range(self.x))+"|\n"
-        return s.translate(str.maketrans(dict(zip(".xo", self.sym))))
+        tr = str.maketrans(dict(zip(".xo_", self.sym)))
+        s = "\n"
+        for row in zip(*[f"{col:.<{self.y}}"[::-1] for col in self.board]):
+            s += "|"+" ".join(row)+"|\n"
+        s += "-_"*self.x + "-\n "\
+            + "_".join(f"{i+1}" for i in range(self.x))+"\n"
+        return s.translate(tr)
 
     @staticmethod
     def input_int(prompt):
