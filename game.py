@@ -18,7 +18,7 @@ class Game:
         s = "\n"
         for row in zip(*[f"{col:.<{self.y}}"[::-1] for col in self.board]):
             s += "|"+" ".join(row)+"|\n"
-        s += "-_"*self.x + "-\n "\
+        s += " " + "-_"*self.x + "\n "\
             + "_".join(f"{i+1}" for i in range(self.x))+"\n"
         return s.translate(tr)
 

@@ -1,5 +1,7 @@
 rm -f test.log
 
+python main.py -h
+
 python main.py -p1 "🟥" -p2 "🟢" -e "🔼" -s "　" -o test.log << _
 1
 1

@@ -13,7 +13,7 @@ optional arguments:
   -p1 P1, -player1 P1    symbol for player 1   (default 'x')
   -p2 P2, -player2 P2    symbol for player 2   (default 'o')
   -e E, -empty E         symbol for empty slot (default '.')
-  -s S, -separator S     used for separating slots
+  -s S, -separator S     string for separating slots (default ' ')
   (for better looking, P1, P2, E and S should have the same width)
   -x X, -width X         board width   (default 7)
   -y Y, -height Y        board height  (default 6)
