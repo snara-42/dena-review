@@ -46,6 +46,8 @@ class Game:
 
     def write_log(self, res):
         print(res)
+        if not self.logfile:
+            return
         try:
             with open(self.logfile, "a") as f:
                 f.write(res)
